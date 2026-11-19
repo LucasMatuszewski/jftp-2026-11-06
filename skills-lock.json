@@ -36,6 +36,13 @@
       "skillPath": "skills/legacy-codebase-workflows/SKILL.md",
       "computedHash": "fe3d2be078bc51545ef89d11417f5178b8a087311442fc4be8960ba0d72a8a9f"
     },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "sourceType": "github",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "computedHash": "56d72677aca02689ac89bd48734e8c19b40ab86716d1257eaf5f1238b43cda6b"
+    },
     "respond-to-code-review": {
       "source": "EdukeyTeam/agent-toolbox",
       "commit": "f84f1de5076e4a45e36cfece936018c598f8fa83",

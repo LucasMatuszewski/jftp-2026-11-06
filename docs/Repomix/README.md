@@ -1,12 +1,13 @@
 # Repomix dla jFTP
 
-[Pakiet XML](jftp-repomix.xml) obejmuje 182 śledzone pliki `.java` z `src/main/java`. Zawiera deklaracje, ciała metod i oryginalne komentarze. `pom.xml`, zasoby, pomoc i pozostałe katalogi są poza zakresem pakietu.
+[Pakiet XML](jftp-repomix.xml) obejmuje 182 śledzone pliki `.java` z `src/main/java`. Zawiera deklaracje, ciała metod i oryginalne komentarze. Przy pytaniach o budowanie, dystrybucję, lokalizację i pomoc dobierz osobny [pakiet zasobów](jftp-repomix.resources.xml) i [mapę powiązań](../jftp-zasoby.md).
 
 | Plik | Co zawiera | Rozmiar |
 | --- | --- | --- |
 | [RepoMapa](../jftp-repo-map.rust.md) | Ścieżki, numery linii i 243 wybrane deklaracje z 1586 wykrytych | 4096 szacowanych tokenów w surowej mapie, według liczby znaków podzielonej przez 4 |
 | [Repomix](jftp-repomix.xml) | Kod źródłowy ze wszystkich 182 plików w tym samym zakresie | 228 324 tokeny według `o200k_base`, 897 787 bajtów |
 | [Repomix skompresowany](jftp-repomix.compressed.xml) | Wybrane fragmenty kodu z tych samych 182 plików, z usuniętymi komentarzami | 96 323 tokeny według `o200k_base`, 392 501 bajtów |
+| [Repomix zasobów i konfiguracji](jftp-repomix.resources.xml) | 294 pliki tekstowe, w tym wszystkie 172 pakiety językowe, Maven, konfiguracja Eclipse, tekstowa pomoc JavaHelp oraz skrypty dystrybucji | 153 180 tokenów według `o200k_base`, 515 590 bajtów |
 
 RepoMapa wskazuje klasę `FTPSession` i wybrane metody. W pakiecie wyszukaj `<file path="src/main/java/com/myjavaworld/jftp/FTPSession.java">`, a następnie `connect(final RemoteHost remoteHost)`. Zobaczysz między innymi tworzenie klienta FTP i parsera listingu przez `Class.forName`. Do weryfikacji zachowania i cytowania numerów linii korzystaj z [oryginału](../../src/main/java/com/myjavaworld/jftp/FTPSession.java#L593). Przy pytaniu o jedną metodę wystarczy odczytać jej fragment.
 
@@ -43,4 +44,25 @@ $repomixOutput = Join-Path $repomixStage 'jftp-repomix.compressed.xml'
 npx.cmd --yes repomix@1.18.1 . --config docs/Repomix/.artifacts/repomix.compressed.config.json --output $repomixOutput
 if ($LASTEXITCODE -ne 0) { throw 'Generowanie skompresowanego Repomix zakończyło się błędem.' }
 Copy-Item -LiteralPath $repomixOutput -Destination docs/Repomix/jftp-repomix.compressed.xml
+```
+
+## Zasoby i konfiguracja
+
+Pakiet zasobów powstał z tekstowych plików aplikacji przy rewizji `a3f67544d2102a3454d8eef14cd146b1ecf25a73`, z wyłączoną kompresją i usuwaniem komentarzy. Zawiera 172 pliki `.properties`, 107 tekstowych plików JavaHelp oraz 15 plików konfiguracji, dystrybucji i dokumentacji głównej. Obrazy i ikony są ujęte liczbowo w [mapie zasobów](../jftp-zasoby.md), a ich oryginały pozostają dostępne w `src/main/images` i `src/main/help`.
+
+Weryfikacja XML potwierdziła kompletność wszystkich 294 ścieżek i zgodność treści po zdekodowaniu 41 niemieckich plików jako ISO‑8859‑1, normalizacji końców linii i przycięciu brzegowych białych znaków w 199 wpisach. SHA-256 pakietu to `156017b9954833132576b28c55547a77264df6dbb208a101da8fb13f4f09d8c1`.
+
+Odtworzenie pakietu w PowerShellu z katalogu głównego repozytorium:
+
+```powershell
+$resourceStage = Join-Path ([System.IO.Path]::GetTempPath()) ("jftp-resources-" + [guid]::NewGuid())
+$resourceOutput = "$resourceStage.xml"
+$resourceTool = 'docs/Repomix/.artifacts/stage-repomix-resources.py'
+python $resourceTool --stage $resourceStage
+if ($LASTEXITCODE -ne 0) { throw 'Przygotowanie zasobów zakończyło się błędem.' }
+npx.cmd --yes repomix@1.18.1 $resourceStage --config docs/Repomix/.artifacts/repomix.resources.config.json --output $resourceOutput
+if ($LASTEXITCODE -ne 0) { throw 'Pakowanie zasobów zakończyło się błędem.' }
+python $resourceTool --verify $resourceOutput
+if ($LASTEXITCODE -ne 0) { throw 'Weryfikacja pakietu zasobów zakończyła się błędem.' }
+Copy-Item -LiteralPath $resourceOutput -Destination docs/Repomix/jftp-repomix.resources.xml
 ```

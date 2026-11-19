@@ -5,3 +5,4 @@
 /Repomix/jftp-repomix.compressed.xml -text
 /Repomix/.artifacts/repomix.compressed.config.json -text
 /Repomix/.artifacts/remove-retained-javadoc.mjs -text
+/Repomix/jftp-repomix.resources.xml -text

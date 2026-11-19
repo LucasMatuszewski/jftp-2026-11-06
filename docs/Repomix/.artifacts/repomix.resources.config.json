@@ -1,0 +1,31 @@
+{
+  "include": [
+    "pom.xml",
+    "README.md",
+    "LICENSE.txt",
+    "NOTICE.txt",
+    ".classpath",
+    ".project",
+    ".settings/*",
+    "src/main/resources/**/*.properties",
+    "src/main/resources_de/**/*.properties",
+    "src/main/resources_zh_TW/**/*.properties",
+    "src/main/help/**/*.{html,xml,dtd,txt,css}",
+    "src/main/assembly/*.xml",
+    "src/main/scripts/*.{bat,sh}"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": ["docs/**", "**/.env", "**/.env.*", "**/*.key", "**/*.keystore"]
+  },
+  "output": {
+    "style": "xml",
+    "parsableStyle": true,
+    "compress": false,
+    "removeComments": false,
+    "removeEmptyLines": false
+  },
+  "security": {"enableSecurityCheck": true},
+  "tokenCount": {"encoding": "o200k_base"}
+}

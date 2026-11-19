@@ -1,2 +1,7 @@
 /jftp-repo-map.rust.md -text
 /Repomap/.artifacts/jftp-repo-map.rust.raw.md -text
+/Repomix/jftp-repomix.xml -text
+/Repomix/.artifacts/repomix.config.json -text
+/Repomix/jftp-repomix.compressed.xml -text
+/Repomix/.artifacts/repomix.compressed.config.json -text
+/Repomix/.artifacts/remove-retained-javadoc.mjs -text

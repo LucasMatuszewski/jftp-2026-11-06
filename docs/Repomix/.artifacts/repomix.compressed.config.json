@@ -1,0 +1,26 @@
+{
+  "include": ["src/main/java/**/*.java"],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": ["docs/**", "**/.env", "**/.env.*", "**/*.key", "**/*.keystore"]
+  },
+  "input": {
+    "processors": [
+      {
+        "pattern": "src/main/java/com/myjavaworld/jftp/JFTPPreferences.java",
+        "command": "node docs/Repomix/.artifacts/remove-retained-javadoc.mjs {file}",
+        "onError": "fail"
+      }
+    ]
+  },
+  "output": {
+    "style": "xml",
+    "parsableStyle": true,
+    "compress": true,
+    "removeComments": true,
+    "removeEmptyLines": false
+  },
+  "security": {"enableSecurityCheck": true},
+  "tokenCount": {"encoding": "o200k_base"}
+}

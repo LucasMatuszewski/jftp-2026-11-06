@@ -1,0 +1,104 @@
+{
+  "revision": "a3f67544d2102a3454d8eef14cd146b1ecf25a73",
+  "citations": [
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplication.java",
+      "sha256": "a917c338b788b34890fdf8747e35862ff5abf3ca62aa3230fefa23c6c1d13e0a",
+      "start_line": 55,
+      "end_line": 55,
+      "quote": "\t\tjftp = new JFTP();",
+      "claim": "Konstruktor tworzy główne okno; brak tej krawędzi w grafie.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplication.java",
+      "sha256": "a917c338b788b34890fdf8747e35862ff5abf3ca62aa3230fefa23c6c1d13e0a",
+      "start_line": 62,
+      "end_line": 62,
+      "quote": "\t\tjftp.newSession();",
+      "claim": "Wywołanie JFTP.newSession jest widoczne w grafie.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTP.java",
+      "sha256": "845ae223525ea119e310178201fa0f5010fc13888fa27d12d6c18e1cf108350b",
+      "start_line": 149,
+      "end_line": 149,
+      "quote": "\t\tFTPSession session = new FTPSession(this);",
+      "claim": "Kod tworzy FTPSession.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 593,
+      "end_line": 593,
+      "quote": "\tpublic void connect(final RemoteHost remoteHost) {",
+      "claim": "Definicja FTPSession.connect(RemoteHost).",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/actions/ConnectAction.java",
+      "sha256": "1c6d72787d08f8a9096dff14d50bad8853bcb9b3be9b5d9c5c9270c576fc868f",
+      "start_line": 73,
+      "end_line": 73,
+      "quote": "\t\t\tsession.connect(remoteHost);",
+      "claim": "ConnectAction wywołuje FTPSession.connect.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java",
+      "sha256": "6af5844028d74575fcb4fc9320629c98347aa74cb61f70a82c547db781d4f137",
+      "start_line": 249,
+      "end_line": 249,
+      "quote": "\t\tsession.connect(selectedHost);",
+      "claim": "FavoritesDlg wywołuje FTPSession.connect.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 703,
+      "end_line": 703,
+      "quote": "\t\t\tconnect(this.remoteHost);",
+      "claim": "Reconnect ponownie wywołuje connect.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 617,
+      "end_line": 617,
+      "quote": "\t\tnew SwingWorker() {",
+      "claim": "W connect powstaje anonimowy SwingWorker.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 1500,
+      "end_line": 1500,
+      "quote": "\t\tnew SwingWorker() {",
+      "claim": "W disconnect powstaje osobny anonimowy SwingWorker; krawędź z connect do tego obiektu jest błędna.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 624,
+      "end_line": 624,
+      "quote": "\t\t\t\t\tclient = (FTPClient) Class.forName(",
+      "claim": "Klient FTP jest tworzony przez refleksję.",
+      "status": "observed"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 649,
+      "end_line": 649,
+      "quote": "\t\t\t\t\t\tclient.connect(remoteHost.getHostName(), port);",
+      "claim": "Wywołanie connect klienta bibliotecznego.",
+      "status": "observed"
+    }
+  ]
+}

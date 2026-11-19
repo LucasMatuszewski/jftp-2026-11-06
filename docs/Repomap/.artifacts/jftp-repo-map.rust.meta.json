@@ -1,0 +1,155 @@
+{
+  "baseline_contract": "repo_map.py 1.2.0",
+  "cache": "none; every run reads and parses the selected files",
+  "coverage": {
+    "candidates_seen": 182,
+    "definitions_found": 1586,
+    "definitions_in_map": 243,
+    "definitions_omitted": 1343,
+    "files_with_definitions": 179,
+    "parsed_files": 182,
+    "selected_files": 182
+  },
+  "dependencies": {
+    "tree-sitter": "0.25.10",
+    "tree-sitter-c": "0.24.2",
+    "tree-sitter-c-sharp": "0.23.5",
+    "tree-sitter-cpp": "0.23.4",
+    "tree-sitter-go": "0.25.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-javascript": "0.25.0",
+    "tree-sitter-python": "0.25.0",
+    "tree-sitter-rust": "0.24.2",
+    "tree-sitter-typescript": "0.23.2"
+  },
+  "descriptors": [],
+  "dirty": true,
+  "estimated_tokens": 4096,
+  "estimator": "ceil(Unicode characters / 4); a size estimate, not a model tokenizer",
+  "export": {
+    "artifact_dir": "D:\\AI\\labuser\\.codex\\visualizations\\2026\\11\\19\\01a1f2fe-f106-7e52-9464-085df83c2d8d\\jftp-staging",
+    "estimator": "ceil(Unicode characters / 4); a size estimate, not a model tokenizer",
+    "evidence_dir": "D:\\jftp\\docs\\Repomap\\.artifacts",
+    "generation_elapsed_seconds": 2.1837984,
+    "implementation": "rust",
+    "raw_estimated_tokens": 4096,
+    "raw_file": "D:\\jftp\\docs\\Repomap\\.artifacts\\jftp-repo-map.rust.raw.md",
+    "raw_unicode_characters": 16381,
+    "raw_utf8_bytes": 16381,
+    "report_estimated_tokens": 4473,
+    "report_file": "D:\\jftp\\docs\\jftp-repo-map.rust.md",
+    "report_sha256": "2a3d39a2092c27b9375384ac39640ee23b5eff9d8d295b41cac20ced3cc674dd",
+    "report_unicode_characters": 17891,
+    "report_utf8_bytes": 17891,
+    "schema_version": 1
+  },
+  "fingerprint_scope": "selected readable files and skip reasons, from current bytes; ignored files and secret contents are excluded",
+  "focus_not_found": {
+    "files_not_parsed": [],
+    "symbols_without_definitions": []
+  },
+  "git": true,
+  "git_notes": [],
+  "implementation": "rust (experimental)",
+  "inventory_summary": {
+    "languages": {
+      "java": 182
+    },
+    "modules": [
+      {
+        "files": 182,
+        "path": "src/main"
+      }
+    ],
+    "modules_omitted": 0
+  },
+  "limits": {
+    "budget": 4096,
+    "max_edges": 200000,
+    "max_file_bytes": 2000000,
+    "max_files": 10000,
+    "max_tags_per_file": 20000,
+    "max_total_tags": 200000
+  },
+  "map_sha256": "d761e41c15f70ae7c6e6788db9d05a919b01a557520b3dd3c1fc02171a35beb0",
+  "parse_failures": [],
+  "queries": {
+    "c": {
+      "path": "tree-sitter-language-pack/c-tags.scm",
+      "sha256": "108cf8e68e61061f3212e724e5947fe08a5c1b259278daf3c459ad90a646b769"
+    },
+    "c_sharp": {
+      "path": "tree-sitter-language-pack/csharp-tags.scm",
+      "sha256": "28e45f2b77a12a8afa3dfe93e629e2ba842bd7a11c1ed51ed2add722c0a33c9b"
+    },
+    "cpp": {
+      "path": "tree-sitter-language-pack/cpp-tags.scm",
+      "sha256": "d9f4aa4d471cd35001307900d09786f1ac443845d17c422e97c50a73dfed2862"
+    },
+    "go": {
+      "path": "tree-sitter-language-pack/go-tags.scm",
+      "sha256": "4c4e1f43b3ed42f1ca3deb6b847783aa3333d35285285b31163ca99c932ff292"
+    },
+    "java": {
+      "path": "tree-sitter-language-pack/java-tags.scm",
+      "sha256": "5e277c72738f2f5bf948eb717eaf1d3a2f7c6d6ad43cbed778ef3f236a81adf1"
+    },
+    "javascript": {
+      "path": "tree-sitter-language-pack/javascript-tags.scm",
+      "sha256": "d2a9592300ddb2fa0418cd1c603decd9ecf6ec56d8bb3f1ea59028f9c2cfd6e2"
+    },
+    "python": {
+      "path": "tree-sitter-language-pack/python-tags.scm",
+      "sha256": "2830ab33b89a5305d9fe16f6c151eb136fc4542abf012a37f8199bcec2ed164d"
+    },
+    "rust": {
+      "path": "tree-sitter-language-pack/rust-tags.scm",
+      "sha256": "debcf55ea29a38f28f59150d3d35b9397fd36040e3e6d4197ccc411f710c07a8"
+    },
+    "tsx": {
+      "path": "tree-sitter-languages/typescript-tags.scm",
+      "sha256": "38c74279e74f880db8932f360e981330a5cafe5db2493b85db3ad0d9f2408bd1"
+    },
+    "typescript": {
+      "path": "tree-sitter-languages/typescript-tags.scm",
+      "sha256": "38c74279e74f880db8932f360e981330a5cafe5db2493b85db3ad0d9f2408bd1"
+    }
+  },
+  "ranking": "Aider-derived PageRank over identifier definitions and references; bare identifier text is matched, not a resolved call graph",
+  "rendering": {
+    "clipped_declarations": [],
+    "declaration_character_limit": 8000,
+    "declaration_line_limit": 80,
+    "format": "compact",
+    "whitespace": "leading whitespace removed, including multiline literal lines; declaration sketch, not verbatim source"
+  },
+  "revision": "14e62ceba4e371c2a0b955604b10f065f46f4f7d",
+  "selection": {
+    "coverage_percent": 15.32156368221942,
+    "effective_max_definitions": 1586,
+    "excludes": [],
+    "focus_files": [],
+    "focus_symbols": [
+      "JFTPApplication",
+      "FTPSession",
+      "RemoteHost"
+    ],
+    "mode": "ranked",
+    "requested_coverage_percent": null,
+    "requested_max_definitions": null,
+    "selection_limit_reached": false,
+    "subtrees": [
+      "src/main/java"
+    ]
+  },
+  "skipped": [],
+  "source_notes": [],
+  "source_root": "D:\\jftp",
+  "status": "complete",
+  "syntax_error_files": [],
+  "tool": "legacy-codebase-workflows legacy-repo-map",
+  "truncated": true,
+  "unsupported_languages": [],
+  "version": "0.3.2",
+  "working_copy_fingerprint": "b2add5739ff1eca4f4e15ca95b32685d6f4ea20cab28192a1ff5bdad65cd3330"
+}

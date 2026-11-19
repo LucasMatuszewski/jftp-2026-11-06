@@ -1,0 +1,19 @@
+flowchart TD
+    User([Desktop user]) --> Window
+
+    subgraph App["jFTP desktop application"]
+        Launch[JFTPApplication] --> Window[JFTP window and session tabs]
+        Window --> Session[FTPSession]
+        Session --> Panes[Local and remote panes]
+        Session --> Worker[Background SwingWorker]
+        Session --> Protocol[ftpapi client and listing parser]
+        Session --> Security[JFTP SSL context]
+        Window --> Help[JavaHelp broker]
+        Window --> Resources[Bundled UI text and images]
+        Help --> HelpFiles[Bundled help files]
+        Security -->|configures SSL| Protocol
+    end
+
+    Session --> Local[Local filesystem]
+    Protocol --> Server[External FTP server]
+    Window --> Settings[Local preferences and favorites]

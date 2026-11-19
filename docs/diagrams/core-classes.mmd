@@ -1,0 +1,34 @@
+classDiagram
+    direction LR
+    class JFTPApplication {
+        +main(String[] args)
+    }
+    class JFTP {
+        +newSession()
+    }
+    class SessionPanel
+    class FTPSession {
+        +connect(RemoteHost host)
+        +upload()
+        +download()
+    }
+    class LocalPane
+    class RemotePane
+    class RemoteHost
+    class Favorite
+    class FTPClient {
+        <<external>>
+    }
+    class ListParser {
+        <<external>>
+    }
+
+    JFTPApplication --> JFTP : creates window
+    JFTP --> FTPSession : creates session tab
+    SessionPanel <|-- FTPSession
+    FTPSession *-- LocalPane : owns
+    FTPSession *-- RemotePane : owns
+    FTPSession --> RemoteHost : holds current target
+    RemoteHost <|-- Favorite
+    FTPSession --> FTPClient : holds client
+    FTPSession --> ListParser : holds parser

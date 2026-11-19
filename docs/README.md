@@ -4,3 +4,4 @@
 - [Mapa zasobów i pakowania](jftp-zasoby.md) wiąże pakiety językowe z kodem Javy i pokazuje zależności pomocy, obrazów oraz dystrybucji.
 - [Graf wywołań i zależności Javy](CodeGraph/README.md) daje punkt wyjścia do analizy wpływu zmian między klasami.
 - [Pakiety Repomix](Repomix/README.md) dostarczają pełne źródła Javy, wariant skompresowany i osobny pakiet tekstowych zasobów oraz konfiguracji.
+- [Architecture diagrams](architecture.md) show the system context, core classes, connection sequence, and batch upload activity.

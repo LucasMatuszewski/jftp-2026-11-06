@@ -1,0 +1,14 @@
+flowchart TD
+    Start([Upload action]) --> Ready{Connected with local selection?}
+    Ready -->|No| Stop([Return without transfer])
+    Ready -->|Yes| Begin[Clear abort flag and mark session busy]
+    Begin --> Worker[Start background worker]
+    Worker --> Next{Another selected item?}
+    Next -->|Yes| KeepGoing{Connected and no abort requested?}
+    Next -->|No| Listing[Attempt remote listing with remote filter]
+    KeepGoing -->|No| Listing
+    KeepGoing -->|Yes| Transfer[Upload file or traverse directory with local filter]
+    Transfer --> Next
+    Listing --> Finish[Schedule completion on EDT]
+    Finish --> Refresh[Update remote pane and clear busy state]
+    Refresh --> End([Return to session])

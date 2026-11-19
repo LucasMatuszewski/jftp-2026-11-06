@@ -1,0 +1,44 @@
+sequenceDiagram
+    actor User
+    participant Action as ConnectAction
+    participant Session as FTPSession (EDT)
+    participant Worker as Background worker
+    participant Client as ftpapi client
+    participant Pane as RemotePane
+
+    User->>Action: Open Connect
+    Action->>User: Show connection dialog
+    alt Canceled or closed without a profile
+        User-->>Action: No profile
+    else Dialog returns a profile
+        User-->>Action: Submit validated connection details
+        Action->>Session: connect(remoteHost)
+        Note over Session: Active connection prompts first<br/>Confirm schedules disconnect<br/>New connect does not wait
+        opt No active connection or user confirms replacement
+            Session->>Session: Set connecting status and busy state
+            Session--)Worker: Start construct()
+            Worker->>Worker: Create client and parser from profile class names
+            Worker->>Client: Configure client
+            opt SSL configured
+                Worker->>Client: Set SSL context
+            end
+            Worker->>Client: Register session listeners
+            Worker->>Client: connect(), then login() if connect returns
+            alt Connection or login throws FTPException
+                Worker->>Worker: Log error and attempt disconnect
+            else Connected and logged in
+                opt Configured commands or initial remote directory
+                    Worker->>Client: Run commands, then set directory when configured
+                end
+                Worker->>Client: Read working directory and list with remote filter
+            end
+            opt Worker returns normally
+                Worker--)Session: Schedule finished() on EDT
+                opt Client is still connected
+                    Session->>Pane: Apply remote listing
+                    Session->>Session: Update tab title
+                end
+                Session->>Session: Clear busy state, request local directory
+            end
+        end
+    end

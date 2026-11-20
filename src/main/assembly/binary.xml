@@ -38,6 +38,19 @@
 		<fileSet>
 			<directory>${project.build.scriptSourceDirectory}</directory>
 			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>jftp.bat</include>
+			</includes>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.scriptSourceDirectory}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>jftp.sh</include>
+			</includes>
+			<lineEnding>unix</lineEnding>
+			<fileMode>0755</fileMode>
 			<filtered>true</filtered>
 		</fileSet>
 	</fileSets>

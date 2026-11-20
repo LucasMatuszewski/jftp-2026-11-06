@@ -6,10 +6,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ConnectionProfileTest extends TestCase {
+import org.junit.jupiter.api.Test;
 
+public class ConnectionProfileTest {
+
+	@Test
 	public void testPostLoginCommandsIgnoreBlankLinesAndPreserveOrderAndSpacing() {
 		RemoteHost profile = new RemoteHost();
 		profile.setCommands("\r\nPWD\r\n  \n  SYST  \rTYPE I\n");
@@ -19,6 +24,7 @@ public class ConnectionProfileTest extends TestCase {
 		assertEquals("PWD\n  SYST  \nTYPE I\n", profile.getCommandsAsString());
 	}
 
+	@Test
 	public void testFavoriteIdentityUsesNameCaseInsensitively() {
 		Favorite saved = new Favorite();
 		saved.setName("Work Site");
@@ -33,6 +39,7 @@ public class ConnectionProfileTest extends TestCase {
 		assertFalse(saved.equals(candidate));
 	}
 
+	@Test
 	public void testFavoriteSerializationPreservesConnectionOptions() throws Exception {
 		Favorite saved = new Favorite();
 		saved.setName("Test site");

@@ -8,9 +8,14 @@ import java.util.regex.Pattern;
 import com.myjavaworld.util.DateFilter;
 import com.myjavaworld.util.RegexFilter;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LocalFileFilterTest extends TestCase {
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class LocalFileFilterTest {
 
 	private static final long DAY = 24L * 60 * 60 * 1000;
 	private File matching;
@@ -18,6 +23,7 @@ public class LocalFileFilterTest extends TestCase {
 	private File older;
 	private File directory;
 
+	@BeforeEach
 	protected void setUp() throws Exception {
 		long now = System.currentTimeMillis();
 		matching = Files.createTempFile("jftp-filter-", ".TXT").toFile();
@@ -27,6 +33,7 @@ public class LocalFileFilterTest extends TestCase {
 		assertTrue(older.setLastModified(now - 3 * DAY));
 	}
 
+	@AfterEach
 	protected void tearDown() throws Exception {
 		for (File path : new File[] { matching, otherName, older, directory }) {
 			if (path != null) {
@@ -35,6 +42,7 @@ public class LocalFileFilterTest extends TestCase {
 		}
 	}
 
+	@Test
 	public void testInclusionRequiresBothNameAndDate() {
 		LocalFileFilter filter = filter(false);
 		assertTrue(filter.accept(new LocalFile(matching)));
@@ -42,6 +50,7 @@ public class LocalFileFilterTest extends TestCase {
 		assertFalse(filter.accept(new LocalFile(older)));
 	}
 
+	@Test
 	public void testExclusionRetainsFilesThatFailEitherCriterion() {
 		LocalFileFilter filter = filter(true);
 		assertFalse(filter.accept(new LocalFile(matching)));
@@ -49,6 +58,7 @@ public class LocalFileFilterTest extends TestCase {
 		assertTrue(filter.accept(new LocalFile(older)));
 	}
 
+	@Test
 	public void testDirectoriesRemainBrowsableWithEitherFilterMode() {
 		LocalFile child = new LocalFile(directory);
 		assertTrue(filter(false).accept(child));

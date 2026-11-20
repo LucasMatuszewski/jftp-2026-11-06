@@ -7,18 +7,24 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.SwingUtilities;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class MTableTest extends TestCase {
+import org.junit.jupiter.api.Test;
 
+public class MTableTest {
+
+	@Test
 	public void testPopupOnSelectedRowPreservesMultipleSelection() throws Exception {
 		assertEquals("[0, 1]", selectionSeenByPopupListener(1));
 	}
 
+	@Test
 	public void testPopupOnUnselectedRowReplacesSelection() throws Exception {
 		assertEquals("[2]", selectionSeenByPopupListener(2));
 	}
 
+	@Test
 	public void testPopupBelowRowsClearsSelection() throws Exception {
 		assertEquals("[]", selectionSeenByPopupListener(3));
 	}
@@ -40,7 +46,7 @@ public class MTableTest extends TestCase {
 						0L, 0, 1, popupRow * rowHeight + 1, 1, true, MouseEvent.BUTTON3));
 			}
 		});
-		assertNotNull("The popup event should reach the listener", selection.get());
+		assertNotNull(selection.get(), "The popup event should reach the listener");
 		return Arrays.toString(selection.get());
 	}
 }

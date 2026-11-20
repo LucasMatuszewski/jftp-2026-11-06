@@ -7,10 +7,15 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.SwingUtilities;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SwingWorkerTest extends TestCase {
+import org.junit.jupiter.api.Test;
 
+public class SwingWorkerTest {
+
+	@Test
 	public void testBackgroundResultIsAvailableWhenCompletionRunsOnEdt() throws Exception {
 		final CountDownLatch completed = new CountDownLatch(1);
 		final AtomicBoolean constructOnEdt = new AtomicBoolean();
@@ -36,9 +41,9 @@ public class SwingWorkerTest extends TestCase {
 			}
 		});
 
-		assertTrue("Completion callback did not run", completed.await(5, TimeUnit.SECONDS));
-		assertFalse("Work should be off the event dispatch thread", constructOnEdt.get());
-		assertTrue("Completion should run on the event dispatch thread", finishedOnEdt.get());
+		assertTrue(completed.await(5, TimeUnit.SECONDS), "Completion callback did not run");
+		assertFalse(constructOnEdt.get(), "Work should be off the event dispatch thread");
+		assertTrue(finishedOnEdt.get(), "Completion should run on the event dispatch thread");
 		assertSame(result, valueAtCompletion.get());
 	}
 }

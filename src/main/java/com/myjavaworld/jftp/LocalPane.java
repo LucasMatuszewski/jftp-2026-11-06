@@ -276,8 +276,8 @@ public class LocalPane extends JPanel implements ActionListener, MouseListener,
 			for (int i = 0; i < selectedRows.length; i++) {
 				size += model.getFileAt(selectedRows[i]).getSize();
 			}
-			statusArgs[0] = new Integer(count);
-			statusArgs[1] = new Long(size);
+			statusArgs[0] = count;
+			statusArgs[1] = size;
 			// statusArgs[2] = new Integer(count);
 			labStatus.setText(statusFormat2.format(statusArgs));
 			return;
@@ -286,8 +286,8 @@ public class LocalPane extends JPanel implements ActionListener, MouseListener,
 		for (int i = 0; i < count; i++) {
 			size += model.getFileAt(i).getSize();
 		}
-		statusArgs[0] = new Integer(count);
-		statusArgs[1] = new Long(size);
+		statusArgs[0] = count;
+		statusArgs[1] = size;
 		// statusArgs[2] = new Integer(count);
 		labStatus.setText(statusFormat1.format(statusArgs));
 	}
@@ -445,32 +445,36 @@ public class LocalPane extends JPanel implements ActionListener, MouseListener,
 				JComponent.WHEN_FOCUSED);
 	}
 
-	class DirectoryComboBoxModel extends AbstractListModel implements
-			ComboBoxModel {
+	class DirectoryComboBoxModel extends AbstractListModel<LocalFile> implements
+			ComboBoxModel<LocalFile> {
 
 		private LocalFile selectedDir = null;
-		private Vector dirs = null;
+		private Vector<LocalFile> dirs = null;
 
 		public DirectoryComboBoxModel(LocalFile dir) {
-			dirs = new Vector(10);
+			dirs = new Vector<>(10);
 			this.selectedDir = dir;
 			// addI
 		}
 
-		public Object getSelectedItem() {
+		@Override
+		public LocalFile getSelectedItem() {
 			return selectedDir;
 		}
 
+		@Override
 		public void setSelectedItem(Object selectedDir) {
 			this.selectedDir = (LocalFile) selectedDir;
 			fireContentsChanged(this, -1, -1);
 		}
 
+		@Override
 		public int getSize() {
 			return dirs.size();
 		}
 
-		public Object getElementAt(int index) {
+		@Override
+		public LocalFile getElementAt(int index) {
 			return dirs.get(index);
 		}
 
@@ -490,7 +494,7 @@ public class LocalPane extends JPanel implements ActionListener, MouseListener,
 		}
 	}
 
-	class DirectoryCellRenderer extends MLabel implements ListCellRenderer {
+	class DirectoryCellRenderer extends MLabel implements ListCellRenderer<LocalFile> {
 
 		private IndentIcon indentIcon = null;
 
@@ -500,9 +504,9 @@ public class LocalPane extends JPanel implements ActionListener, MouseListener,
 			indentIcon = new IndentIcon();
 		}
 
-		public Component getListCellRendererComponent(JList list, Object value,
-				int index, boolean isSelected, boolean cellHasFocus) {
-			LocalFile lf = (LocalFile) value;
+		@Override
+		public Component getListCellRendererComponent(JList<? extends LocalFile> list,
+				LocalFile lf, int index, boolean isSelected, boolean cellHasFocus) {
 			// if(lf == null) {
 			// setText("null");
 			// return this;

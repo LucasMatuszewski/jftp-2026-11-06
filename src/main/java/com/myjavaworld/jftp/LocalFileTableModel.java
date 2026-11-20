@@ -63,6 +63,7 @@ public class LocalFileTableModel extends AbstractTableModel {
 		return data[row];
 	}
 
+	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
 	}
@@ -72,10 +73,12 @@ public class LocalFileTableModel extends AbstractTableModel {
 		return COLUMN_NAMES[col];
 	}
 
+	@Override
 	public int getRowCount() {
 		return data.length;
 	}
 
+	@Override
 	public Object getValueAt(int row, int col) {
 		if (col == 0) {
 			return data[row];
@@ -84,13 +87,13 @@ public class LocalFileTableModel extends AbstractTableModel {
 			return data[row].getType();
 		}
 		if (col == 2) {
-			return new Long(data[row].getSize());
+			return data[row].getSize();
 		}
 		return new Date(data[row].getLastModified());
 	}
 
 	@Override
-	public Class getColumnClass(int col) {
+	public Class<?> getColumnClass(int col) {
 		if (col == 0) {
 			return LocalFile.class;
 		}

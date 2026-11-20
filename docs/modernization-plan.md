@@ -22,7 +22,8 @@ Before stage 1, and again before any work item affected by a documentation chang
 
 - Before dispatching each assignment, write a Markdown brief under `docs/.briefs/modernization-plan/`, for example `docs/.briefs/modernization-plan/01-verify-baseline.md`. Include `Plan: docs/modernization-plan.md`, the work-item ID, the starting revision or snapshot, the objective, allowed paths and actions, verification steps, expected evidence, and when to stop and report a blocker.
 - Send the internal agent or subagent only the brief path and a short instruction to follow it and report evidence. For a headless CLI agent, use the same handoff with a copy of the brief in its working directory. Check that the worker can access the brief before starting.
-- Keep briefs temporary and out of commits. Assign work independent of this plan under `docs/.briefs/standalone/` and record `Plan: none`. When removal of this accepted or cancelled plan is authorized, remove it and the remaining briefs explicitly linked to it in the same cleanup. Check each brief's `Plan` field before removal. Keep other plans' briefs and standalone briefs available to their owners.
+- Commit the [preflight brief](.briefs/modernization-plan/00-preflight.md) and [baseline test brief](.briefs/modernization-plan/01-verify-baseline.md) with this plan. Commit later briefs as scoped changes for this plan. Keep credentials and private test data out of tracked briefs. Assign independent work under `docs/.briefs/standalone/` and record `Plan: none`.
+- After completing the plan and passing its final gate, check each brief's `Plan` field and remove briefs linked to this plan in the closing commit. Remove the links to retired briefs if this plan stays in the repository. Apply the same cleanup if this plan is cancelled. Preserve other plans' and standalone briefs.
 
 ## 1. Establish a working baseline
 

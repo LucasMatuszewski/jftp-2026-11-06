@@ -74,7 +74,7 @@
     "write-implementation-plan": {
       "source": "./.agents/skills/write-implementation-plan",
       "sourceType": "local",
-      "computedHash": "91105b11c98a0b326a993a0c4acd0c65d44eb4bf60976d61e70ed66e13708033"
+      "computedHash": "67c04626a82e44a6aa66e922cc69a5be93bdbe349d8e6dbcc5a2e12c5a7d995f"
     },
     "write-prd": {
       "source": "EdukeyTeam/agent-toolbox",

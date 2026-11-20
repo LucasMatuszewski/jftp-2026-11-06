@@ -18,6 +18,12 @@ Before stage 1, and again before any work item affected by a documentation chang
 - Overlap QA with implementation only when the tested commit or frozen snapshot is identified and the outputs are isolated. Give each concurrent run its own build directory, extracted package, synthetic preferences, test-server state, logs, and screenshots as applicable. Run the relevant gate again on the integrated candidate before committing.
 - Keep the user informed at stage gates with the outcome, verification evidence, and commit IDs. Ask for a decision when scope, behavior, or architecture would change, and surface gates that remain blocked after investigation with the evidence and the decision or prerequisite needed to resume.
 
+### Temporary task briefs
+
+- Before dispatching each assignment, write a Markdown brief under `docs/.briefs/modernization-plan/`, for example `docs/.briefs/modernization-plan/01-verify-baseline.md`. Include `Plan: docs/modernization-plan.md`, the work-item ID, the starting revision or snapshot, the objective, allowed paths and actions, verification steps, expected evidence, and when to stop and report a blocker.
+- Send the internal agent or subagent only the brief path and a short instruction to follow it and report evidence. For a headless CLI agent, use the same handoff with a copy of the brief in its working directory. Check that the worker can access the brief before starting.
+- Keep briefs temporary and out of commits. Assign work independent of this plan under `docs/.briefs/standalone/` and record `Plan: none`. When removal of this accepted or cancelled plan is authorized, remove it and the remaining briefs explicitly linked to it in the same cleanup. Check each brief's `Plan` field before removal. Keep other plans' briefs and standalone briefs available to their owners.
+
 ## 1. Establish a working baseline
 
 - Re-run the 11 existing tests using the [verified runner](../src/test/README.md). Use their current assertions as the behavioral baseline.
@@ -51,7 +57,7 @@ Before stage 1, and again before any work item affected by a documentation chang
 
 ## Optional headless OpenCode delegation
 
-Use Xiaomi MiMo-V2.6-Pro for a scoped read-only second opinion when the user has authorized provider usage and any data sent to it. Verify `opencode --version` and `opencode run --help` against the installed CLI. OpenCode 2.2.5 supports the command below. Start with a synthetic prompt containing no repository data once provider access and usage are authorized.
+Use Xiaomi MiMo-V2.6-Pro for a scoped read-only second opinion when the user has authorized provider usage and any data sent to it. Verify `opencode --version` and `opencode run --help` against the installed CLI. OpenCode 2.2.5 supports the command below. Start with a synthetic brief containing no repository data once provider access and usage are authorized.
 
 Point `OPENCODE_CONFIG` at a dedicated `opencode.json` outside the checkout. Provide `MIMO_API_KEY` through the process environment. The example uses the pay-as-you-go endpoint. For a token plan, use the exact endpoint for the authorized account. [OpenCode configuration](https://opencode.ai/docs/config/) · [Xiaomi integration](https://mimo.mi.com/docs/en-US/tokenplan/integration/opencode)
 
@@ -84,18 +90,23 @@ Point `OPENCODE_CONFIG` at a dedicated `opencode.json` outside the checkout. Pro
 }
 ```
 
-Set `$openCodeScratch` and `$openCodeConfig` to the absolute paths of the dedicated scratch directory and configuration file. Use both outside the checkout and keep only explicitly authorized copies in scratch. Use a sanitized process environment and keep secrets out of prompts and attached files. The lead agent reviews the returned evidence before using any conclusion. [OpenCode CLI](https://opencode.ai/docs/cli/) · [OpenCode permissions](https://opencode.ai/docs/permissions/)
+Set `$openCodeScratch` and `$openCodeConfig` to the absolute paths of the dedicated scratch directory and configuration file. Use both outside the checkout. Copy the task brief to `brief.md` in scratch with only the inputs authorized for this provider. Use a sanitized process environment and keep secrets out of briefs and attached files. The lead agent reviews the returned evidence before using any conclusion and removes the temporary scratch copies after accepting the report. [OpenCode CLI](https://opencode.ai/docs/cli/) · [OpenCode permissions](https://opencode.ai/docs/permissions/)
 
 ```powershell
 if ([string]::IsNullOrWhiteSpace($env:MIMO_API_KEY)) {
     throw 'MIMO_API_KEY must be set in the process environment.'
 }
 
+$openCodeBrief = Join-Path -Path $openCodeScratch -ChildPath 'brief.md'
+if (-not (Test-Path -LiteralPath $openCodeBrief -PathType Leaf)) {
+    throw 'Copy the authorized task brief to the OpenCode scratch directory first.'
+}
+
 $previousOpenCodeConfig = $env:OPENCODE_CONFIG
 Push-Location -LiteralPath $openCodeScratch -ErrorAction Stop
 try {
     $env:OPENCODE_CONFIG = $openCodeConfig
-    opencode run --standalone --model mimo/mimo-v2.6-pro --agent plan --format json 'Answer the scoped read-only question.'
+    opencode run --standalone --model mimo/mimo-v2.6-pro --agent plan --format json --file $openCodeBrief 'Follow the attached brief.md and report your findings with evidence.'
     if ($LASTEXITCODE -ne 0) {
         throw "OpenCode exited with code $LASTEXITCODE."
     }

@@ -10,9 +10,11 @@
 
 The lead performs preflight before stage 1 and repeats affected checks when the sources change:
 
-- [ ] Read the sources of truth, applicable nested instructions, and any relevant ADRs. Reconcile their revisions and scope before deriving acceptance criteria for a brief. Use the [current test suite](../src/test/README.md) as evidence for the behavioral baseline.
-- [ ] Record the starting revision and changes in the working tree. Reconcile any existing startup work with the stage 1 gate and protect unrelated changes. Give the [preflight worker](.briefs/modernization-plan/00-preflight.md) the facts to check against the repository.
-- [ ] Resolve verified documentation drift with evidence. Bring consequential conflicts in behavior, architecture, or verification to the user before starting the affected work.
+- [x] Read the sources of truth, applicable nested instructions, and any relevant ADRs. Reconcile their revisions and scope before deriving acceptance criteria for a brief. Use the [current test suite](../src/test/README.md) as evidence for the behavioral baseline.
+- [x] Record the starting revision and changes in the working tree. Reconcile any existing startup work with the stage 1 gate and protect unrelated changes. Give the [preflight worker](.briefs/modernization-plan/00-preflight.md) the facts to check against the repository.
+- [x] Resolve verified documentation drift with evidence. Bring consequential conflicts in behavior, architecture, or verification to the user before starting the affected work.
+
+See [the QA record](qa/modernization.md) for the starting revision, the verified baseline and subsequent candidate checks.
 
 ## Execution and delegation
 

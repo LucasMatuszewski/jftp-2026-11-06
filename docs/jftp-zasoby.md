@@ -34,7 +34,7 @@ flowchart LR
 ```
 
 - `JFTPApplication` ustawia domyślny język z preferencji. `ResourceLoader` używa tego języka przy pobieraniu pakietu, a jego ścieżka obsługi braku pakietu może zakończyć proces. [Wybór języka](../src/main/java/com/myjavaworld/jftp/JFTPApplication.java#L39) · [Obsługa brakującego pakietu](../src/main/java/com/myjavaworld/util/ResourceLoader.java#L31)
-- Maven deklaruje pięć katalogów zasobów, wersję źródeł i celu kompilatora `1.5`, punkt startowy `JFTPApplication` i zależności `ftpapi` oraz `javahelp`. Deskryptor dystrybucji dołącza biblioteki i skrypty startowe. To zapis bieżącej konfiguracji projektu. [Zależności i zasoby](../pom.xml#L65) · [Kompilator i manifest](../pom.xml#L103) · [Pakowanie dystrybucji](../src/main/assembly/binary.xml#L13)
+- Maven declares five resource roots, the `JFTPApplication` entry point, and the `ftpapi` and `javahelp` dependencies. The distribution puts the application JAR and launchers at the package root and the runtime libraries under `lib/`. Each launcher resolves the JAR beside its own script. The [QA record](qa/modernization.md) records the verified release 8 baseline and Java 25 candidate. [Build configuration](../pom.xml) · [Assembly descriptor](../src/main/assembly/binary.xml)
 - `HelpMenu` wiąże pozycje menu z identyfikatorami JavaHelp. `JFTPHelp2` wyszukuje zestaw pomocy, a `JFTPUtil` ładuje obrazy z zasobów klas. Inwentarz Git zawiera 48 obrazów w katalogu pomocy i 50 w katalogu obrazów. [Wiązanie menu](../src/main/java/com/myjavaworld/jftp/HelpMenu.java#L63) · [Odczyt zestawu pomocy](../src/main/java/com/myjavaworld/jftp/JFTPHelp2.java#L40) · [Odczyt obrazów](../src/main/java/com/myjavaworld/jftp/JFTPUtil.java#L35)
 
 ## Indeks pakietów językowych

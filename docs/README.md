@@ -6,3 +6,4 @@
 - [Pakiety Repomix](Repomix/README.md) dostarczają pełne źródła Javy, wariant skompresowany i osobny pakiet tekstowych zasobów oraz konfiguracji.
 - [Architecture diagrams](architecture.md) show the system context, core classes, connection sequence, and batch upload activity.
 - [Current-state architecture decision record](ADR/000-main-architecture.md) documents technical decisions, runtime boundaries, and the verification strategy.
+- [Modernization QA](qa/modernization.md) records the packaged baseline and migration verification.

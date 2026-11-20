@@ -110,19 +110,13 @@ public class JFTP extends MFrame implements WindowListener, ActionListener,
 	}
 	private JFTPToolBar toolBar = null;
 	private JTabbedPane tabs = null;
-	private boolean applet = false;
 
 	/**
 	 * Creates an instance of JFTP, the main window and the central point for
 	 * the software.
 	 */
 	public JFTP() {
-		this(false);
-	}
-
-	public JFTP(boolean applet) {
 		super(JFTPConstants.PRODUCT_NAME);
-		this.applet = applet;
 		if (resources == null) {
 			if (resources == null) {
 				resources = ResourceLoader
@@ -211,9 +205,7 @@ public class JFTP extends MFrame implements WindowListener, ActionListener,
 		}
 		dispose();
 		System.gc();
-		if (!applet) {
-			System.exit(0);
-		}
+		System.exit(0);
 	}
 
 	public void actionPerformed(ActionEvent evt) {

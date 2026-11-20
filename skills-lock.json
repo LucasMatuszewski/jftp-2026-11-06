@@ -71,6 +71,11 @@
       "skillPath": "skills/write-agents-md/SKILL.md",
       "computedHash": "8f194d505402dea7a347c011cf6b65d372be686a57fe262455ac030bf25751ea"
     },
+    "write-implementation-plan": {
+      "source": "./.agents/skills/write-implementation-plan",
+      "sourceType": "local",
+      "computedHash": "91105b11c98a0b326a993a0c4acd0c65d44eb4bf60976d61e70ed66e13708033"
+    },
     "write-prd": {
       "source": "EdukeyTeam/agent-toolbox",
       "commit": "f84f1de5076e4a45e36cfece936018c598f8fa83",

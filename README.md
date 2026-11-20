@@ -20,6 +20,13 @@ JFTP is written entirely in Java(tm), meaning, it can run on a wide variety of
 platforms such as Windows, Mac OS X, Linux, Solaris, HP-UX, OS/2, UNIX or any 
 other platform with a compatible JVM (Java Virtual Machine). 
 
+Build and run
+-------------
+
+Use JDK 25 and run `mvn clean verify` from the repository root. The build was verified with Maven 3.9.12.
+
+Extract `target/jftp-5.0.2-SNAPSHOT-bin.zip` and run `jftp.bat` on Windows or `sh jftp.sh` on a POSIX shell. The launchers find the JAR beside the script. Keep the package's `lib/` directory with the JAR.
+
 Features
 --------
 

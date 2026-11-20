@@ -1,0 +1,9 @@
+# Modernization verification
+
+## Stage 1
+
+- Starting revision `ef19cb8` had a clean worktree. Its Java and test sources, POM and launchers matched `513b9a5`. The primary checkout contained an uncommitted build patch. The plan branch reproduced it in `8fa8c7f`. Commit `52c10e6` repaired the two launchers and their assembly settings.
+- Windows 11 build 26200, Temurin 25.0.4.1, and Maven 3.9.12. Direct release 8 compilation and Maven `clean verify` passed all 11 characterization cases. Surefire 3.5.5 used its JUnit 3 provider. JDK 25 reported that its release 8 source and target options are obsolete. Assembly reported that the directory format cannot be attached for installation or deployment, while ZIP, directory and TAR.GZ outputs were all produced.
+- The three formats contained the same desktop JAR, launchers and two runtime libraries. The manifest resolved libraries from `lib/`. The application JAR contained the English, German and Traditional Chinese resource bundles, icons and JavaHelp. The TAR.GZ shell launcher was executable with LF line endings.
+- Both original launchers exited 1 with a missing JAR. The replacement scripts passed path and exit-code checks in CMD and Git Bash on Windows. The extracted batch launcher opened the real application from a different working directory. Both locations contained spaces. The selected tab was **Not Connected**, a synthetic subfolder showed its 27-byte test file, canceling a directory change preserved the listing, F1 opened bundled JavaHelp, and Alt+F4 closed the app with exit 0. The launcher log contained only the isolated Java home override.
+- Windows desktop evidence covers [the initial tab](screens/windows-launcher-disconnected.jpg), [the nested listing](screens/windows-launcher-local-folder.jpg), [the directory dialog](screens/windows-launcher-browse-dialog.jpg) and [bundled help](screens/windows-launcher-help.jpg). Native macOS and Linux were outside the available test environment.

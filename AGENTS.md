@@ -15,6 +15,12 @@ Start with the [documentation index](docs/README.md).
 
 Read only the sections needed for the task. Verify original definitions, callers and configuration before making changes. Refresh affected artifacts when their source changes.
 
+## Looking up documentation
+
+- For commands or flags of an installed CLI, start with its built-in help for the relevant subcommand (for example, `gh pr --help` or `glab mr --help`). If help leaves the question unanswered, search Context7 next.
+- For other tool documentation and for documentation or source code of project dependencies, search Context7 first. Use the project's dependency version when available. When exact implementation matters, verify it against that version's source.
+- Use a general web search only if Context7 cannot provide the information needed.
+
 ## Agent Workflow
 
 Agreed requirements and existing PRD/ADR/design decisions govern changes; define expected behavior before code.

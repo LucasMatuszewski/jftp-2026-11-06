@@ -4,9 +4,13 @@ The JUnit 3 tests cover local filtering, connection profiles, ZIP round trips, S
 
 `MTableTest` captures the selection the popup listener sees for an already selected row, a different row, and the area below all rows. When the pre-fix Mac branch from the parent of `14e62ce` was selected in a staging copy on Windows, the last two cases failed with the original selection still present. This checks the regression without claiming native macOS verification.
 
-## Run on the current Windows baseline
+## Run with Maven
 
-Stock `mvn test` stops at the historical HTTP repository. The following path compiles the unchanged application and tests directly. Use a JDK whose `javac` supports `--release 8`. Set `JFTP_TEST_DEPS` to a local folder containing [ftpapi 3.0.0](https://www.jmethods.com/ftpapi/download.html), [JavaHelp 2.0.05](https://repo.maven.apache.org/maven2/javax/help/javahelp/2.0.05/), [JUnit 3.8.1](https://repo.maven.apache.org/maven2/junit/junit/3.8.1/), and [AppleJavaExtensions 1.4](https://repo.maven.apache.org/maven2/com/apple/AppleJavaExtensions/1.4/) for the legacy Mac adapter. Run from the repository root.
+From the repository root, run `mvn clean verify`. The restored baseline was verified on Windows with Maven 3.9.12 and Temurin 25.0.4.1. The build compiles for Java 8 and Surefire 3.5.5 discovers the 11 JUnit 3 cases. The [verification record](../../docs/qa/modernization.md) contains the packaged desktop checks.
+
+## Direct compilation of the original baseline
+
+At revision `513b9a5`, the POM used the historical HTTP repository. The following commands compile that revision directly. Use a JDK whose `javac` supports `--release 8`. Set `JFTP_TEST_DEPS` to a local folder containing [ftpapi 3.0.0](https://www.jmethods.com/ftpapi/download.html), [JavaHelp 2.0.05](https://repo.maven.apache.org/maven2/javax/help/javahelp/2.0.05/), [JUnit 3.8.1](https://repo.maven.apache.org/maven2/junit/junit/3.8.1/), and [AppleJavaExtensions 1.4](https://repo.maven.apache.org/maven2/com/apple/AppleJavaExtensions/1.4/) for the legacy Mac adapter. Run from the repository root.
 
 ```powershell
 $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('jftp-tests-' + [guid]::NewGuid())

@@ -7,7 +7,7 @@
 
 ## 1. Overview
 
-jFTP is a single desktop application that browses and transfers files between a local filesystem and a user-selected FTP server. This ADR records the architecture visible in source and build configuration. Historical rationale and rejected alternatives are unknown. Consequences and review triggers are present-day analysis. Build, packaged startup, and server interoperability remain unverified.
+jFTP is a single desktop application that browses and transfers files between a local filesystem and a user-selected FTP server. This ADR records the architecture visible at the source revision above. Historical rationale and rejected alternatives are unknown. Consequences and review triggers are present-day analysis. The [modernization QA record](../qa/modernization.md) documents the later build restoration, packaged startup, and loopback checks.
 
 ## 2. Technology documentation references
 
@@ -37,7 +37,7 @@ One Maven project packages the application. `JFTPApplication` applies the locale
 
 [Dependencies and resources](../../pom.xml#L65-L100) · [Compiler and manifest](../../pom.xml#L102-L124) · [Assembly phase](../../pom.xml#L140-L155) · [Resource inventory](../jftp-zasoby.md)
 
-The assembly descriptor puts the project JAR at the distribution root, while both launcher scripts refer to it under `lib/`. The effective archive and launcher outcome need verification. Reproducing the build also requires resolving dependencies declared against a historical repository. [Assembly file sets](../../src/main/assembly/binary.xml#L19-L43) · [Windows launcher](../../src/main/scripts/jftp.bat#L1) · [Shell launcher](../../src/main/scripts/jftp.sh#L1) · [Dependency repository](../../pom.xml#L41-L47)
+At the recorded revision, the assembly descriptor put the project JAR at the distribution root and both launchers searched under `lib/`. The restored build uses the jMethods HTTPS repository. Both launchers now resolve the JAR next to the script. The application manifest still looks for the two runtime libraries in `lib/`. [Assembly file sets](../../src/main/assembly/binary.xml#L19-L56) · [Windows launcher](../../src/main/scripts/jftp.bat#L1) · [Shell launcher](../../src/main/scripts/jftp.sh#L1) · [Dependency repository](../../pom.xml#L41-L47)
 
 ## 4. Components and dependencies
 
@@ -165,7 +165,7 @@ sequenceDiagram
 
 ## 10. Verification and testing strategy
 
-**Observed baseline.** The POM declares JUnit. The tracked test directories contain only placeholders. No build, automated suite, desktop session, or FTP service was exercised for this ADR. [Test dependency](../../pom.xml#L65-L70) · [Test sources](../../src/test/java) · [Test resources](../../src/test/resources)
+**Observed baseline.** At the recorded revision, the POM declared JUnit and the tracked test directories held placeholders. The characterization suite now contains 11 cases. The [test instructions](../../src/test/README.md) and [modernization QA record](../qa/modernization.md) document execution and coverage.
 
 **Future changes.** Apply repository TDD and Manual QA to the area being changed. Establish existing behavior first where the source leaves outcomes open. [Repository workflow](../../AGENTS.md)
 

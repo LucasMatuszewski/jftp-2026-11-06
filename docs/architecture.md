@@ -163,4 +163,4 @@ The Abort action sets the session flag and invokes `client.abort()` on a separat
 
 ## Verification
 
-Source links above refer to the inspected revision. The four standalone files were parsed with `mermaid.parse(source)` and rendered with `mermaid.render(id, source)` using Mermaid 11.12.0 in headless Chrome 157.0.8103.79. The PNGs were visually reviewed. The embedded sources match the standalone files. The target Markdown viewer may use a different Mermaid version. Application execution was outside this documentation review.
+Source links above describe the inspected revision. The four standalone files were parsed with `mermaid.parse(source)` and rendered with `mermaid.render(id, source)` using Mermaid 11.12.0 in headless Chrome 157.0.8103.79. The PNGs were visually reviewed. The embedded sources match the standalone files. The target Markdown viewer may use a different Mermaid version. The [modernization QA record](qa/modernization.md) documents subsequent application verification.

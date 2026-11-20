@@ -14,16 +14,25 @@ import java.util.zip.ZipFile;
 import com.myjavaworld.jftp.LocalFileFilter;
 import com.myjavaworld.util.RegexFilter;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ZipRoundTripTest extends TestCase {
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class ZipRoundTripTest {
 
 	private Path root;
 
+	@BeforeEach
 	protected void setUp() throws IOException {
 		root = Files.createTempDirectory("jftp-zip-");
 	}
 
+	@AfterEach
 	protected void tearDown() throws IOException {
 		if (root == null) {
 			return;
@@ -44,6 +53,7 @@ public class ZipRoundTripTest extends TestCase {
 		});
 	}
 
+	@Test
 	public void testFilteredDirectoryRestoresRelativePathsAndFileBytes() throws IOException {
 		Path source = Files.createDirectory(root.resolve("source"));
 		Path nested = Files.createDirectory(source.resolve("nested"));
@@ -67,7 +77,7 @@ public class ZipRoundTripTest extends TestCase {
 		try {
 			assertNotNull(entries.getEntry("nested/payload.bin"));
 			ZipEntry emptyDirectory = entries.getEntry("nested/empty/");
-			assertNotNull("The archive should preserve empty directories", emptyDirectory);
+			assertNotNull(emptyDirectory, "The archive should preserve empty directories");
 			assertTrue(emptyDirectory.isDirectory());
 			assertNull(entries.getEntry("nested/ignore.txt"));
 		} finally {
